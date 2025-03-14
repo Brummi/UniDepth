@@ -26,6 +26,9 @@ def UniDepth(version="v2", backbone="vitl14", pretrained=True):
     repo_dir = os.path.dirname(os.path.realpath(__file__))
     with open(os.path.join(repo_dir, "configs", f"config_{version}_{backbone}.json")) as f:
         config = json.load(f)
+
+    if version=="v2":
+         version = "v2old"
     
     model = MAP_VERSIONS[version](config)
     if pretrained:
