@@ -27,10 +27,12 @@ def UniDepth(version="v2", backbone="vitl14", pretrained=True):
     with open(os.path.join(repo_dir, "configs", f"config_{version}_{backbone}.json")) as f:
         config = json.load(f)
 
-    if version=="v2":
-         version = "v2old"
     
     model = MAP_VERSIONS[version](config)
+    
+    if version=="v2":
+    
+         version = "v2old"
     if pretrained:
         path = huggingface_hub.hf_hub_download(repo_id=f"lpiccinelli/unidepth-{version}-{backbone}", filename=f"pytorch_model.bin", repo_type="model")
         info = model.load_state_dict(torch.load(path), strict=False)
